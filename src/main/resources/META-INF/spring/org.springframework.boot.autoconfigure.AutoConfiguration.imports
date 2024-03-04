@@ -1,1 +1,3 @@
-com.mylib.api.MyLibConfig
+com.mylib.autoconfiguration.PostApiClientAutoConfiguration
+com.mylib.autoconfiguration.UserApiClientAutoConfiguration
+com.mylib.autoconfiguration.PhotoApiClientAutoConfiguration

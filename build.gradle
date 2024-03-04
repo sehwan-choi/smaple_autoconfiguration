@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.mylib'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
 	sourceCompatibility = '17'
@@ -31,6 +31,7 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0'
 }
 
 publishing {
@@ -38,7 +39,7 @@ publishing {
 		maven(MavenPublication) {
 			groupId = 'com.mylib' // groupId
 			artifactId = 'api'           // artifactId
-			version = '0.0.1-SNAPSHOT'       // version
+			version = '1.0.0'       // version
 
 			from components.java
 
