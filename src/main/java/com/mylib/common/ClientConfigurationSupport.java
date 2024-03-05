@@ -5,7 +5,6 @@ import feign.Logger;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import feign.codec.ErrorDecoder;
-import lombok.Value;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -80,7 +79,7 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
         }
     }
 
-    @Value
+
     public static class AnnotationInfo {
         String encoderName;
         String decoderName;
@@ -102,6 +101,26 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
 
         public AnnotationInfo(AnnotationInfo annotationInfo, Logger.Level level) {
             this(annotationInfo.getEncoderName(), annotationInfo.getDecoderName(), annotationInfo.getErrorDecoderName(), annotationInfo.getClientName(), level);
+        }
+
+        public String getEncoderName() {
+            return encoderName;
+        }
+
+        public String getDecoderName() {
+            return decoderName;
+        }
+
+        public String getErrorDecoderName() {
+            return errorDecoderName;
+        }
+
+        public String getClientName() {
+            return clientName;
+        }
+
+        public Logger.Level getLevel() {
+            return level;
         }
     }
 }

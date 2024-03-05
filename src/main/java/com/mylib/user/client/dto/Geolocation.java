@@ -1,14 +1,8 @@
 package com.mylib.user.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 
-@Getter
-@NoArgsConstructor
-@ToString
 public class Geolocation {
 
     @JsonProperty("lat")
@@ -16,4 +10,20 @@ public class Geolocation {
 
     @JsonProperty("lng")
     private String longitude;
+
+    @Override
+    public String toString() {
+        return "Geolocation{" +
+                "latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                '}';
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
 }

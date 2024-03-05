@@ -2,14 +2,16 @@ package com.mylib.post.service;
 
 import com.mylib.post.client.PostApiClient;
 import com.mylib.post.client.dto.PostResponse;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 public class PostApiClientService implements PostApiService {
 
     private final PostApiClient apiClient;
+
+    public PostApiClientService(PostApiClient apiClient) {
+        this.apiClient = apiClient;
+    }
 
     @Override
     public List<PostResponse> getPosts() {

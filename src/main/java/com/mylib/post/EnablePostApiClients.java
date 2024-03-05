@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 public @interface EnablePostApiClients {
 
     /**
-     * 통합회원 서버에 요청시 사용할 인증 토큰을 설정하는 인터셉터의 스프링 빈 이름을 설정한다.
+     * API요청시 사용할 인증 토큰을 설정하는 인터셉터의 스프링 빈 이름을 설정한다.
      * 만약 빈 값(Empty)이거나 <code>NULL</code>인 경우 기본 인터셉터를 사용 한다.
      *
      * @return 사용할 인터셉터 빈 이름

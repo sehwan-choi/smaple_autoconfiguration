@@ -1,12 +1,5 @@
 package com.mylib.photo.client.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@Getter
-@ToString
-@NoArgsConstructor
 public class PhotoResponse {
 
     private Long id;
@@ -18,4 +11,35 @@ public class PhotoResponse {
     private String url;
 
     private String thumbnailUrl;
+
+    @Override
+    public String toString() {
+        return "PhotoResponse{" +
+                "id=" + id +
+                ", albumId=" + albumId +
+                ", title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getAlbumId() {
+        return albumId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
 }

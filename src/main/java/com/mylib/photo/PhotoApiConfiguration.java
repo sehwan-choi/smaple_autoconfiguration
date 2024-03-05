@@ -9,7 +9,6 @@ import com.mylib.photo.service.PhotoApiService;
 import feign.Feign;
 import feign.RequestInterceptor;
 import feign.slf4j.Slf4jLogger;
-import jakarta.annotation.PostConstruct;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportAware;

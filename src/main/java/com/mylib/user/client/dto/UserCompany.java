@@ -1,13 +1,5 @@
 package com.mylib.user.client.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-
-@Getter
-@NoArgsConstructor
-@ToString
 public class UserCompany {
 
     private String name;
@@ -15,4 +7,25 @@ public class UserCompany {
     private String catchPhrase;
 
     private String bs;
+
+    @Override
+    public String toString() {
+        return "UserCompany{" +
+                "name='" + name + '\'' +
+                ", catchPhrase='" + catchPhrase + '\'' +
+                ", bs='" + bs + '\'' +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCatchPhrase() {
+        return catchPhrase;
+    }
+
+    public String getBs() {
+        return bs;
+    }
 }

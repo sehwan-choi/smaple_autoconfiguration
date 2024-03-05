@@ -1,12 +1,5 @@
 package com.mylib.post.client.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@Getter
-@NoArgsConstructor
-@ToString
 public class PostResponse {
 
     private Long id;
@@ -16,4 +9,30 @@ public class PostResponse {
     private String title;
 
     private String body;
+
+    @Override
+    public String toString() {
+        return "PostResponse{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getBody() {
+        return body;
+    }
 }
