@@ -17,7 +17,7 @@ import java.util.Map;
 
 public abstract class ClientConfigurationSupport implements ImportAware, ApplicationContextAware {
 
-    private final String annotationName;
+    protected final String annotationName;
 
     protected ApplicationContext context;
 
@@ -38,7 +38,12 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
         AnnotationAttributes attributes = AnnotationAttributes.fromMap(metadata);
 
         if (attributes != null) {
-            this.annotationInfo = new AnnotationInfo(attributes.getString("encoder"), attributes.getString("decoder"), attributes.getString("errorDecoder"), attributes.getString("client"));
+            this.annotationInfo = new AnnotationInfo(attributes.getString("encoder"),
+                                                    attributes.getString("decoder"),
+                                                    attributes.getString("errorDecoder"),
+                                                    attributes.getString("client"),
+                                                    attributes.getString("credentialsInterceptor"));
+
             Object level = attributes.get("level");
             if (level != null) {
                 this.annotationInfo = new AnnotationInfo(this.annotationInfo, ((Logger.Level) level));
@@ -87,20 +92,23 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
         String clientName;
         Logger.Level level;
 
-        public AnnotationInfo(String encoderName, String decoderName, String errorDecoderName, String clientName, Logger.Level level) {
+        String credentialsInterceptorName;
+
+        public AnnotationInfo(String encoderName, String decoderName, String errorDecoderName, String clientName, Logger.Level level, String credentialsInterceptorName) {
             this.encoderName = encoderName;
             this.decoderName = decoderName;
             this.errorDecoderName = errorDecoderName;
             this.clientName = clientName;
             this.level = level;
+            this.credentialsInterceptorName = credentialsInterceptorName;
         }
 
-        public AnnotationInfo(String encoderName, String decoderName, String errorDecoderName, String clientName) {
-            this(encoderName, decoderName, errorDecoderName, clientName, null);
+        public AnnotationInfo(String encoderName, String decoderName, String errorDecoderName, String clientName, String credentialsInterceptorName) {
+            this(encoderName, decoderName, errorDecoderName, clientName, null, credentialsInterceptorName);
         }
 
         public AnnotationInfo(AnnotationInfo annotationInfo, Logger.Level level) {
-            this(annotationInfo.getEncoderName(), annotationInfo.getDecoderName(), annotationInfo.getErrorDecoderName(), annotationInfo.getClientName(), level);
+            this(annotationInfo.getEncoderName(), annotationInfo.getDecoderName(), annotationInfo.getErrorDecoderName(), annotationInfo.getClientName(), level, annotationInfo.getCredentialsInterceptorName());
         }
 
         public String getEncoderName() {
@@ -121,6 +129,10 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
 
         public Logger.Level getLevel() {
             return level;
+        }
+
+        public String getCredentialsInterceptorName() {
+            return credentialsInterceptorName;
         }
     }
 }

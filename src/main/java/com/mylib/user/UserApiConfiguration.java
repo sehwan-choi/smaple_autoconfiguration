@@ -9,36 +9,16 @@ import com.mylib.user.service.UserApiService;
 import feign.Feign;
 import feign.RequestInterceptor;
 import feign.slf4j.Slf4jLogger;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ImportAware;
-import org.springframework.core.annotation.AnnotationAttributes;
-import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
-import java.util.Map;
-
-public class UserApiConfiguration extends ClientConfigurationSupport implements ImportAware, ApplicationContextAware {
-
-    private String credentialsInterceptorName;
+public class UserApiConfiguration extends ClientConfigurationSupport {
 
     private final UserClientProperties userProperties;
 
     public UserApiConfiguration(UserClientProperties userProperties) {
         super(EnableUserApiClients.class.getName());
         this.userProperties = userProperties;
-    }
-
-    @Override
-    public void setImportMetadata(AnnotationMetadata importMetadata) {
-        super.setImportMetadata(importMetadata);
-
-        Map<String, Object> metadata = importMetadata.getAnnotationAttributes(EnableUserApiClients.class.getName());
-        AnnotationAttributes attributes = AnnotationAttributes.fromMap(metadata);
-
-        if (attributes != null) {
-            this.credentialsInterceptorName = attributes.getString("credentialsInterceptor");
-        }
     }
 
     @Bean
@@ -60,8 +40,8 @@ public class UserApiConfiguration extends ClientConfigurationSupport implements 
     }
 
     public RequestInterceptor getCredentialsHeaderInterceptor() {
-        if (StringUtils.hasText(this.credentialsInterceptorName)) {
-            return context.getBean(this.credentialsInterceptorName, RequestInterceptor.class);
+        if (StringUtils.hasText(super.annotationInfo.getCredentialsInterceptorName())) {
+            return context.getBean(super.annotationInfo.getCredentialsInterceptorName(), RequestInterceptor.class);
         } else {
             AuthClientRequestInterceptor interceptor = new AuthClientRequestInterceptor();
 

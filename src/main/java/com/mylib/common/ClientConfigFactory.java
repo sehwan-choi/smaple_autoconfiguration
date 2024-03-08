@@ -50,6 +50,10 @@ public class ClientConfigFactory {
         return new ResponseEntityDecoder(new SpringDecoder(objectFactory));
     }
 
+    /**
+     * @throw FeignClientException : feignClient 요청시 응답으로 httpStatus 400번대 에러인 경우 발생하는 예외
+     *        FeignServerException : feignClient 요청시 응답으로 httpStatus 500번대 에러인 경우 발생하는 예외
+     */
     public static ErrorDecoder errorDecoder() {
         return new ErrorDecoder.Default();
     }

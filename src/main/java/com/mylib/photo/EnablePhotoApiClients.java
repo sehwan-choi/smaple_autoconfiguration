@@ -45,6 +45,9 @@ public @interface EnablePhotoApiClients {
      *
      * @return 사용할 디코더의 빈 이름
      * @see ClientConfigFactory#errorDecoder() () 기본값으로 사용되는 디코더
+     *
+     * @throw FeignClientException : feignClient 요청시 응답으로 httpStatus 400번대 에러인 경우 발생하는 예외
+     *        FeignServerException : feignClient 요청시 응답으로 httpStatus 500번대 에러인 경우 발생하는 예외
      */
     String errorDecoder() default "";
 
