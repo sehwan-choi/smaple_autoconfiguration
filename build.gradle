@@ -29,6 +29,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0'
+	implementation 'commons-codec:commons-codec:1.16.1'
 }
 
 publishing {
