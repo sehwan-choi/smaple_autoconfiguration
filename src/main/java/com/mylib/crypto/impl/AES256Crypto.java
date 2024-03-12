@@ -1,7 +1,5 @@
 package com.mylib.crypto.impl;
 
-import com.mylib.crypto.Decrypt;
-import com.mylib.crypto.Encrypt;
 import com.mylib.crypto.exception.CryptException;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
@@ -14,7 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-public class AES256Crypto implements Encrypt, Decrypt {
+public class AES256Crypto {
 
     private final String aesKey;
 
@@ -22,7 +20,6 @@ public class AES256Crypto implements Encrypt, Decrypt {
         this.aesKey = aesKey;
     }
 
-    @Override
     public String encrypt(String raw) {
         assertTarget(raw);
         try {
@@ -44,7 +41,6 @@ public class AES256Crypto implements Encrypt, Decrypt {
         }
     }
 
-    @Override
     public String decrypt(String encodedText) {
         assertTarget(encodedText);
         try {
