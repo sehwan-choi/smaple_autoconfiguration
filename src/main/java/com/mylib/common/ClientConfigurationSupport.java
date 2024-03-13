@@ -86,13 +86,17 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
 
 
     public static class AnnotationInfo {
-        String encoderName;
-        String decoderName;
-        String errorDecoderName;
-        String clientName;
-        Logger.Level level;
+        private final String encoderName;
 
-        String credentialsInterceptorName;
+        private final String decoderName;
+
+        private final String errorDecoderName;
+
+        private final String clientName;
+
+        private final Logger.Level level;
+
+        private final String credentialsInterceptorName;
 
         public AnnotationInfo(String encoderName, String decoderName, String errorDecoderName, String clientName, Logger.Level level, String credentialsInterceptorName) {
             this.encoderName = encoderName;
