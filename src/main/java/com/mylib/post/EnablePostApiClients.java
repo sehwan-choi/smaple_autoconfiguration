@@ -1,5 +1,6 @@
 package com.mylib.post;
 
+import com.mylib.autoconfiguration.PostApiClientAutoConfiguration;
 import com.mylib.common.ClientConfigFactory;
 import feign.Logger;
 import org.springframework.context.annotation.Import;
@@ -9,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Import(PostApiConfiguration.class)
+@Import(PostApiClientAutoConfiguration.class)
 public @interface EnablePostApiClients {
 
     /**

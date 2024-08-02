@@ -1,5 +1,6 @@
 package com.mylib.user;
 
+import com.mylib.autoconfiguration.UserApiClientAutoConfiguration;
 import com.mylib.common.ClientConfigFactory;
 import feign.Logger;
 import org.springframework.context.annotation.Import;
@@ -9,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Import(UserApiConfiguration.class)
+@Import(UserApiClientAutoConfiguration.class)
 public @interface EnableUserApiClients {
 
     /**

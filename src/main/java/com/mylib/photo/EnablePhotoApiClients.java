@@ -1,5 +1,6 @@
 package com.mylib.photo;
 
+import com.mylib.autoconfiguration.PhotoApiClientAutoConfiguration;
 import com.mylib.common.ClientConfigFactory;
 import feign.Logger;
 import org.springframework.context.annotation.Import;
@@ -9,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Import(PhotoApiConfiguration.class)
+@Import(PhotoApiClientAutoConfiguration.class)
 public @interface EnablePhotoApiClients {
 
     /**
