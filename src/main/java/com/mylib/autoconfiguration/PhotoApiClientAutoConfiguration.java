@@ -15,7 +15,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
 
 @Configuration
 @EnableConfigurationProperties(PhotoClientProperties.class)
@@ -39,7 +38,7 @@ public class PhotoApiClientAutoConfiguration extends ClientConfigurationSupport 
                 .errorDecoder(getErrorDecoder())
                 .contract(ClientConfigFactory.contract())
                 .logger(new Slf4jLogger(PhotoApiClient.class))
-                .logLevel(annotationInfo.getLevel())
+                .logLevel(getLevel())
                 .requestInterceptor(getCredentialsHeaderInterceptor())
                 .target(PhotoApiClient.class, photoProperties.getBaseUrl());
     }
@@ -50,7 +49,7 @@ public class PhotoApiClientAutoConfiguration extends ClientConfigurationSupport 
     }
 
     public RequestInterceptor getCredentialsHeaderInterceptor() {
-        if (StringUtils.hasText(super.annotationInfo.getCredentialsInterceptorName())) {
+        if (super.hasCredentialsInterceptorName()) {
             return context.getBean(super.annotationInfo.getCredentialsInterceptorName(), RequestInterceptor.class);
         } else {
             AuthClientRequestInterceptor interceptor = new AuthClientRequestInterceptor();

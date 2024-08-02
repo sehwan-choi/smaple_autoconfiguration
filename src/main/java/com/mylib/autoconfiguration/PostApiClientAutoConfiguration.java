@@ -15,7 +15,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
 
 import static com.mylib.autoconfiguration.PostApiClientAutoConfiguration.POST_API_CLIENT_AUTO_CONFIG;
 
@@ -41,7 +40,7 @@ public class PostApiClientAutoConfiguration extends ClientConfigurationSupport {
                 .errorDecoder(getErrorDecoder())
                 .contract(ClientConfigFactory.contract())
                 .logger(new Slf4jLogger(PostApiClient.class))
-                .logLevel(annotationInfo.getLevel())
+                .logLevel(getLevel())
                 .requestInterceptor(getCredentialsHeaderInterceptor())
                 .target(PostApiClient.class, postProperties.getBaseUrl());
     }
@@ -52,7 +51,7 @@ public class PostApiClientAutoConfiguration extends ClientConfigurationSupport {
     }
 
     public RequestInterceptor getCredentialsHeaderInterceptor() {
-        if (StringUtils.hasText(super.annotationInfo.getCredentialsInterceptorName())) {
+        if (super.hasCredentialsInterceptorName()) {
             return context.getBean(super.annotationInfo.getCredentialsInterceptorName(), RequestInterceptor.class);
         } else {
             AuthClientRequestInterceptor interceptor = new AuthClientRequestInterceptor();

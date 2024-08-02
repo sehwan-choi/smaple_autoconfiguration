@@ -52,7 +52,7 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
     }
 
     protected Decoder getDecoder() {
-        if (StringUtils.hasText(this.annotationInfo.getDecoderName())) {
+        if (this.hasDecoderName()) {
             return this.context.getBean(this.annotationInfo.getDecoderName(), Decoder.class);
         } else {
             return ClientConfigFactory.decoder();
@@ -60,7 +60,7 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
     }
 
     protected Encoder getEncoder() {
-        if (StringUtils.hasText(this.annotationInfo.getEncoderName())) {
+        if (this.hasEncoderName()) {
             return this.context.getBean(this.annotationInfo.getEncoderName(), Encoder.class);
         } else {
             return ClientConfigFactory.encoder();
@@ -68,7 +68,7 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
     }
 
     protected ErrorDecoder getErrorDecoder() {
-        if (StringUtils.hasText(this.annotationInfo.getErrorDecoderName())) {
+        if (this.hasErrorDecoderName()) {
             return this.context.getBean(this.annotationInfo.getErrorDecoderName(), ErrorDecoder.class);
         } else {
             return ClientConfigFactory.errorDecoder();
@@ -77,13 +77,43 @@ public abstract class ClientConfigurationSupport implements ImportAware, Applica
 
 
     protected Client getClient() {
-        if (StringUtils.hasText(this.annotationInfo.getClientName())) {
+        if (this.hasClientName()) {
             return this.context.getBean(this.annotationInfo.getClientName(), Client.class);
         } else {
             return new Client.Default(null, null);
         }
     }
 
+    protected Logger.Level getLevel() {
+        if (this.hasAnnotationInfo()) {
+            return this.annotationInfo.getLevel();
+        }
+        return Logger.Level.FULL;
+    }
+
+    protected boolean hasEncoderName() {
+        return this.hasAnnotationInfo() && StringUtils.hasText(this.annotationInfo.getEncoderName());
+    }
+
+    protected boolean hasDecoderName() {
+        return this.hasAnnotationInfo() && StringUtils.hasText(this.annotationInfo.getDecoderName());
+    }
+
+    protected boolean hasErrorDecoderName() {
+        return this.hasAnnotationInfo() && StringUtils.hasText(this.annotationInfo.getErrorDecoderName());
+    }
+
+    protected boolean hasClientName() {
+        return this.hasAnnotationInfo() && StringUtils.hasText(this.annotationInfo.getClientName());
+    }
+
+    protected boolean hasCredentialsInterceptorName() {
+        return this.hasAnnotationInfo() && StringUtils.hasText(this.annotationInfo.getCredentialsInterceptorName());
+    }
+
+    protected boolean hasAnnotationInfo() {
+        return this.annotationInfo != null;
+    }
 
     public static class AnnotationInfo {
         private final String encoderName;
